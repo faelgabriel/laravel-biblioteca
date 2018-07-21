@@ -40,10 +40,10 @@
                     <!-- Left Side Of Navbar -->
                     @if (!Auth::guest())
                         <ul class="nav navbar-nav">
-                            {{--<li><a href="{{ route('user.index') }}">Users</a></li>--}}
+                            <li><a href="{{ route('user.index') }}">Usuários</a></li>
                             <li><a href="{{ route('author.index') }}">Autores</a></li>
-                            {{--<li><a href="{{ route('book.index') }}">Books</a></li>--}}
-                            {{--<li><a href="{{ route('lending.index') }}">Lendings</a></li>--}}
+                            <li><a href="{{ route('book.index') }}">Livros</a></li>
+                            {{--<li><a href="{{ route('lending.index') }}">Emprestimos</a></li>--}}
                         </ul>
                     @endif
 

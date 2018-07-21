@@ -6,24 +6,23 @@
         <div class="col-md-12">
             <div class="panel panel-default">
             	<ol class="breadcrumb panel-heading">
-                	<li><a href="{{route('category.index')}}">Categorias</a></li>
+                	<li><a href="{{route('user.index')}}">Usuários</a></li>
                 	<li class="active">Editar</li>
                 </ol>
                 <div class="panel-body">
-	                <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+	                <form action="{{ route('user.update', $user->id) }}" method="POST">
 	                	{{ csrf_field() }}
-						<div class="form-group">
-						  	<label for="name">Nome</label>
-						    <input type="text" class="form-control" name="name" id="name" placeholder="Nome" value="{{ $category->name }}">
-						</div>
                         <div class="form-group">
-                            <img src="http://192.168.22.10/laravel/public/images/category/{{ $category->image }}"  width="10%" />
-                            <input type="hidden" name="deleteimage" value="{{ $category->image }}">
+                            <label>Nome</label>
+                            <span>{{ $user->name }}</span>
                         </div>
-                        <div class="control-group">
-                            <div class="controls">
-                                <input name="image" type="file">
-                            </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <span>{{ $user->email }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Permissão</label>
+                            <input type="text" class="form-control" name="role" id="role" placeholder="Permissão" value="{{ $user->role }}">
                         </div>
 						<br />
 						<button type="submit" class="btn btn-primary">Salvar</button>

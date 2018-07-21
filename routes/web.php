@@ -26,3 +26,16 @@ Route::get('/authors/edit/{id}', ['uses'=>'AuthorController@edit', 'as'=>'author
 Route::post('/authors/update/{id}', ['uses'=>'AuthorController@update', 'as'=>'author.update']);
 Route::get('/authors/delete/{id}', ['uses'=>'AuthorController@delete', 'as'=>'author.delete']);
 Route::put('/authors/search', ['uses'=>'AuthorController@search', 'as'=>'author.search']);
+
+Route::get('/books', ['uses'=>'BookController@index', 'as'=>'book.index']);
+Route::get('/books/add', ['uses'=>'BookController@add', 'as'=>'book.add']);
+Route::post('/books/save', ['uses'=>'BookController@save', 'as'=>'book.save']);
+Route::get('/books/edit/{id}', ['uses'=>'BookController@edit', 'as'=>'book.edit']);
+Route::post('/books/update/{id}', ['uses'=>'BookController@update', 'as'=>'book.update']);
+Route::get('/books/delete/{id}', ['uses'=>'BookController@delete', 'as'=>'book.delete']);
+Route::put('/books/search', ['uses'=>'BookController@search', 'as'=>'book.search']);
+
+Route::get('/users', ['uses'=>'UserController@index', 'as'=>'user.index']);
+Route::get('/users/edit/{id}', ['uses'=>'UserController@edit', 'as'=>'user.edit']);
+Route::post('/users/update/{id}', ['uses'=>'UserController@update', 'as'=>'user.update']);
+Route::put('/users/search', ['uses'=>'UserController@search', 'as'=>'user.search']);
