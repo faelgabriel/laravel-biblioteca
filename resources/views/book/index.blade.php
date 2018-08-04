@@ -5,17 +5,17 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <ol class="breadcrumb panel-heading">
-                    <li class="active">Categorias</li>
+                    <li class="active">Livros</li>
                 </ol>
                 <div class="panel-body">
-                    <form class="form-inline" action="{{ route('category.search') }}" method="POST">
+                    <form class="form-inline" action="{{ route('book.search') }}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
                         <div class="form-group" style="float: right;">
-                            <p><a href="{{route('category.add')}}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-plus"></i> Adicionar</a></p>
+                            <p><a href="{{route('book.add')}}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-plus"></i> Adicionar</a></p>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Categoria">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Livro">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                     </form>
@@ -25,21 +25,31 @@
                             <tr>
                                 <th>Cod</th>
                                 <th width="20">Imagem</th>
-                                <th>Nome</th>
+                                <th>Título</th>
+                                <th>Autor(es)</th>
+                                <th>Descrição</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $category)
+                            @foreach($books as $book)
                                 <tr>
-                                    <th scope="row" class="text-center">{{ $category->id }}</th>
+                                    <th scope="row" class="text-center">{{ $book->id }}</th>
                                     <td class="center">
-                                        <img src="http://192.168.22.10/laravel/public/images/category/{{ $category->image }}"  width="100%" />
+                                        <img src="/images/book/{{ $book->image }}"  width="100%" />
                                     </td>
-                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $book->title }}</td>
+                                    <td>
+                                        <ul class="list-unstyled">
+                                        @foreach($book->authors as $author)
+                                            <li>{{ $author->name }} {{ $author->surname }}</li>
+                                        @endforeach
+                                        </ul>
+                                    </td>
+                                    <td>{{ $book->description }}</td>
                                     <td width="155" class="text-center">
-                                        <a href="{{route('category.edit', $category->id)}}" class="btn btn-default">Editar</a>
-                                        <a href="{{route('category.delete', $category->id)}}" class="btn btn-danger">Excluir</a>
+                                        <a href="{{route('book.edit', $book->id)}}" class="btn btn-default">Editar</a>
+                                        <a href="{{route('book.delete', $book->id)}}" class="btn btn-danger">Excluir</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -47,7 +57,7 @@
                     </table>
                     @if(!isset($search))
                     <div align="center">
-                        {!! $categories->links() !!}
+                        {!! $books->links() !!}
                     </div>
                     @endif
                 </div>

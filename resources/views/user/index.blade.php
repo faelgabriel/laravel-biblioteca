@@ -33,7 +33,7 @@
                                     <th scope="row" class="text-center">{{ $user->id }}</th>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role }}</td>
+                                    <td>{{ ($user->role == 0 ? 'Aluno' : ($user->role == 255 ? 'Administrador' : '')) }}</td>
                                     <td width="155" class="text-center">
                                         <a href="{{route('user.edit', $user->id)}}" class="btn btn-default">Editar</a>
                                     </td>

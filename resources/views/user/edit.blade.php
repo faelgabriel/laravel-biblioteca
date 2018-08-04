@@ -21,8 +21,11 @@
                             <span>{{ $user->email }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="name">Permissão</label>
-                            <input type="text" class="form-control" name="role" id="role" placeholder="Permissão" value="{{ $user->role }}">
+                            <label for="role">Permissão</label>
+                            <select name="role" id="role">
+                                <option value="0" {{ $user->role == 0 ? 'selected':'' }}>Aluno</option>
+                                <option value="255" {{ $user->role == 255 ? 'selected':'' }}>Administrador</option>
+                            </select> 
                         </div>
 						<br />
 						<button type="submit" class="btn btn-primary">Salvar</button>

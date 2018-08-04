@@ -35,6 +35,16 @@ Route::post('/books/update/{id}', ['uses'=>'BookController@update', 'as'=>'book.
 Route::get('/books/delete/{id}', ['uses'=>'BookController@delete', 'as'=>'book.delete']);
 Route::put('/books/search', ['uses'=>'BookController@search', 'as'=>'book.search']);
 
+Route::get('/lendings', ['uses'=>'LendingController@index', 'as'=>'lending.index']);
+Route::get('/lendings/edit/{id}', ['uses'=>'LendingController@edit', 'as'=>'lending.edit']);
+Route::post('/lendings/update/{id}', ['uses'=>'LendingController@update', 'as'=>'lending.update']);
+Route::get('/lendings/delete/{id}', ['uses'=>'LendingController@delete', 'as'=>'lending.delete']);
+Route::put('/lendings/search', ['uses'=>'LendingController@search', 'as'=>'lending.search']);
+
+Route::get('/lend', ['uses'=>'LendController@index', 'as'=>'lend.index']);
+Route::post('/lend/save', ['uses'=>'LendController@save', 'as'=>'lend.save']);
+Route::get('/lend/return/{id}', ['uses'=>'LendController@return', 'as'=>'lend.return']);
+
 Route::get('/users', ['uses'=>'UserController@index', 'as'=>'user.index']);
 Route::get('/users/edit/{id}', ['uses'=>'UserController@edit', 'as'=>'user.edit']);
 Route::post('/users/update/{id}', ['uses'=>'UserController@update', 'as'=>'user.update']);

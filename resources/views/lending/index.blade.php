@@ -5,17 +5,14 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <ol class="breadcrumb panel-heading">
-                    <li class="active">Categorias</li>
+                    <li class="active">Empréstimos</li>
                 </ol>
                 <div class="panel-body">
-                    <form class="form-inline" action="{{ route('category.search') }}" method="POST">
+                    <form class="form-inline" action="{{ route('lending.search') }}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="put">
-                        <div class="form-group" style="float: right;">
-                            <p><a href="{{route('category.add')}}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-plus"></i> Adicionar</a></p>
-                        </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Categoria">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="@TODO Usuário">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                     </form>
@@ -24,22 +21,41 @@
                         <thead>
                             <tr>
                                 <th>Cod</th>
-                                <th width="20">Imagem</th>
-                                <th>Nome</th>
+                                <th>Usuário</th>
+                                <th>Livros</th>
+                                <th>Data empréstimo</th>
+                                <th>Data devolução</th>
+                                <th>Data entrega</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $category)
+                            @foreach($lendings as $lending)
                                 <tr>
-                                    <th scope="row" class="text-center">{{ $category->id }}</th>
-                                    <td class="center">
-                                        <img src="http://192.168.22.10/laravel/public/images/category/{{ $category->image }}"  width="100%" />
+                                    <th scope="row" class="text-center">{{ $lending->id }}</th>
+                                    <td>{{ $lending->user->name }} {{ $lending->user->surname }}</td>
+                                    <td>
+                                        <ul class="list-unstyled">
+                                        @foreach($lending->books as $book)
+                                            <li>{{ $book->title }}</li>
+                                        @endforeach
+                                        </ul>
                                     </td>
-                                    <td>{{ $category->name }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($lending->date_start)) }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($lending->date_end)) }}</td>
+                                    <td>
+                                        @if ($lending->date_finish !== null)
+                                            {{ date('d/m/Y', strtotime($lending->date_finish)) }}
+                                        @else
+                                            Não devolvido
+                                        @endif
+                                    </td>
                                     <td width="155" class="text-center">
-                                        <a href="{{route('category.edit', $category->id)}}" class="btn btn-default">Editar</a>
-                                        <a href="{{route('category.delete', $category->id)}}" class="btn btn-danger">Excluir</a>
+                                        @if ($lending->date_finish === null)
+                                        <p><a href="{{route('lend.return', $lending->id)}}" class="btn btn-success">Devolver</a></p>
+                                        @endif
+                                        <a href="{{route('lending.edit', $lending->id)}}" class="btn btn-default">Editar</a>
+                                        <a href="{{route('lending.delete', $lending->id)}}" class="btn btn-danger">Excluir</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -47,7 +63,7 @@
                     </table>
                     @if(!isset($search))
                     <div align="center">
-                        {!! $categories->links() !!}
+                        {!! $lendings->links() !!}
                     </div>
                     @endif
                 </div>

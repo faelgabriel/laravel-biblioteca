@@ -31,10 +31,12 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $role = ($request->input('role') != 0 && $request->input('role') != 255) ? 0 : $request->input('role');
+
         $result = User::find($id)->update([
-            'role' => $request->input('role'),
+            'role' => $role,
         ]);
-        
+
         return redirect()->route('user.index');
     }
 
